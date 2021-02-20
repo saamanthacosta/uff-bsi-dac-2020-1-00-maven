@@ -59,20 +59,20 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String msg = "";
+        String msgNome = "";
         
         String lang = request.getParameter("lang");
         if(lang==null)
             lang = "pt";
         switch(lang){
             case "pt":
-                msg = "Alô, ";
+                msgNome = "Alô, ";
                 break;
             case "en":
-                msg = "Hello, ";
+                msgNome = "Hello, ";
                 break;
             case "fr":
-                msg = "Bonjour, ";
+                msgNome = "Bonjour, ";
                 break;
         }
         
@@ -80,8 +80,21 @@ public class HelloServlet extends HttpServlet {
 
         if(nome==null)
             nome = "Fulano";
+		
+        String msgCidade = "";
         
-        msg = msg+nome+"!";
+		if (lang=="en") {
+			msgCidade = " from ";
+		} else {
+			msgCidade = " de ";
+		}
+		;
+        String cidade = request.getParameter("cidade");
+
+        if(cidade==null)
+            cidade = "Tal lugar";
+        
+        String msg = msgNome+nome+msgCidade+cidade + "!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -110,23 +123,21 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String msg = "";
+        
+        String msgNome = "";
         
         String lang = request.getParameter("lang");
         if(lang==null)
             lang = "pt";
         switch(lang){
             case "pt":
-                msg = "Alô, ";
+                msgNome = "Alô, ";
                 break;
             case "en":
-                msg = "Hello, ";
+                msgNome = "Hello, ";
                 break;
             case "fr":
-                msg = "Bonjour, ";
-                break;
-            case "de":
-                msg = "Hallo, ";
+                msgNome = "Bonjour, ";
                 break;
         }
         
@@ -134,8 +145,21 @@ public class HelloServlet extends HttpServlet {
 
         if(nome==null)
             nome = "Fulano";
+		
+        String msgCidade = "";
         
-        msg = msg+nome+"!";
+		if (lang=="en") {
+			msgCidade = " from ";
+		} else {
+			msgCidade = " de ";
+		}
+		;
+        String cidade = request.getParameter("cidade");
+
+        if(cidade==null)
+            cidade = "Tal lugar";
+        
+        String msg = msgNome+nome+msgCidade+cidade + "!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
